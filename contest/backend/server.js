@@ -100,4 +100,15 @@ app.listen(5000,()=>{
 })
 
 
-//curl -v -F language=py -F file=@/Users/poornimachoudhary/Desktop/Adarsh_important_data/contest/contest/backend/ide/file.py  http://localhost:5000/contest/aug1234/1A
+//curl -v -F language=py -F file=@file.py  http://localhost:5000/contest/aug1234/1A
+// https://www.youtube.com/watch?v=UYh6EvpQquw
+// https://www.youtube.com/watch?v=a30flH_q5-A&list=PL2dKqfImstaRhNOShwTdduXyRbID9GtmA&index=2
+// https://www.youtube.com/watch?v=Oe421EPjeBE
+//https://github.com/john-smilga/node-express-course
+// lsof -i:<port_no>
+// kill -9 <pid>
+//https://www.youtube.com/watch?v=ysS4sL6lLDU
+//https://stackoverflow.com/questions/46629086/node-js-file-upload-server-without-third-party-module/46655323#46655323
+//https://stackoverflow.com/questions/46629086/node-js-file-upload-server-without-third-party-module/46655323#46655323
+//https://www.youtube.com/watch?v=NsHgvKeAEDI
+//https://stackoverflow.com/questions/58051617/how-to-add-custom-function-to-express-module
