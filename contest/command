@@ -9,3 +9,6 @@
 
 *global varaible : injectible appservice
 *token interceptopr : http interceptopr
+#backend
+*npm init -y
+*npm install express
