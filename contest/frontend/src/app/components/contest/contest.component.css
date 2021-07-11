@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+  }
+
+.others{
+    background-color: orange!important;
+    color: #fff;
+}
+.company{
+    background-color: #7e57c2 !important;
+    color: #fff;
+}
+
+.contest-list-background{
+    width: 100%;
+
+}
+.contest-list-header{
+    /* background-color: rgb(215, 129, 255); */
+    background-image: url('../../../assets/pics/lightbackground.jpeg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}

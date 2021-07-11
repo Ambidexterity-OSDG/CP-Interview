@@ -1,0 +1,38 @@
+.problem-container {
+    display: flex;
+    flex-direction: column;
+}
+.problem-data {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+.problem-data .statement{
+    flex: 3;
+}
+.problem-data .submission{
+    flex:1;
+}
+.problem-card {
+    margin: 1rem;
+    height: 90vh;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+}
+.example-full-width {
+    width: 100%;
+  }
+/* delete */
+.submission-card {
+    margin: 1rem;
+}
+  
+  .example-header-image {
+    /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
+    background-size: cover;
+  }

@@ -1,0 +1,70 @@
+<div class="problem-container">
+    <!-- <div class="problem-info">{{'Problem ID'}}</div> -->
+    <div class="problem-data">
+        <div class="statement">
+           
+            <mat-card class="problem-card">
+                <app-problem-viewer></app-problem-viewer>
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"> <mat-icon color="primary">picture_as_pdf</mat-icon></div>
+                  <mat-card-title>{{'Problem'}}</mat-card-title>
+                  <mat-card-subtitle>{{'contest'}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    
+                </mat-card-content>
+                <!-- <mat-card-actions>
+                    <button mat-button>LIKE</button>
+                    <button mat-button>SHARE</button>
+                  </mat-card-actions> -->
+              </mat-card>
+        </div>
+        <div class="submission">
+            <!-- delete-->
+            <mat-card class="submission-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"> <mat-icon color="primary">code</mat-icon> </div>
+                  <mat-card-title>Submission</mat-card-title>
+                  <mat-card-subtitle>
+                    <div class="icon-text">
+                        <span>status :</span>
+                        <mat-icon *ngIf="status==0" color="primary">remove</mat-icon>
+                        <mat-icon *ngIf="status==1" color="warn">clear</mat-icon>
+                        <mat-icon *ngIf="status==2" style="color: green;">done</mat-icon>
+                     </div>  
+                  </mat-card-subtitle>
+                </mat-card-header>
+                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                <mat-card-content>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Problem</mat-label>
+                        <mat-select (selectionChange)="changeStatus($event.value)">
+                          <mat-option  *ngFor="let que of question" [value]="que">
+                            {{que.queId+" "+que.queName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Programming Language</mat-label>
+                        <mat-select>
+                          <mat-option *ngFor="let lang of languageSelector" [value]="lang.extension">
+                            {{lang.codingLanguage}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>File :</mat-label>
+                        <input matInput disabled value="{{'code.py'}}">
+                    </mat-form-field>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>upload</button>
+                  <button mat-button>submit</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+    </div>
+
+</div>

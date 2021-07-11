@@ -1,0 +1,32 @@
+<!-- Header -->
+<mat-toolbar color="primary">
+    <button mat-icon-button [matMenuTriggerFor]="menu"  aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <span>CP Interview</span>
+</mat-toolbar>
+<mat-menu #menu="matMenu">
+    <button (click)="menuSelect('home')" mat-menu-item>
+        <mat-icon color="primary">home</mat-icon>
+        <span>home</span>
+    </button>
+    <button (click)="menuSelect('code')" mat-menu-item>
+      <mat-icon color="primary">code</mat-icon>
+      <span>Contest</span>
+    </button>
+    <button (click)="menuSelect('article')" mat-menu-item>
+        <mat-icon color="primary">article</mat-icon>
+        <span>Learn Algorithm</span>
+    </button>
+    <button (click)="menuSelect('analytics')" mat-menu-item>
+      <mat-icon color="primary">analytics</mat-icon>
+      <span>Solutions & Results</span>
+    </button>
+    <button (click)="menuSelect('profile')" mat-menu-item>
+      <mat-icon color="primary">perm_identity</mat-icon>
+      <span>Profile</span>
+    </button>
+</mat-menu>
+<!-- Content-->
+<img *ngIf="atHome" src="https://miro.medium.com/max/1838/1*fNnHCl0wXbBrrGx3XvruIQ.jpeg" height="100%" width="100%"/>
+<router-outlet></router-outlet>
