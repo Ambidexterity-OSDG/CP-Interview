@@ -1,0 +1,11 @@
+#commands 
+* ng new frontend
+* ng add @angular/material
+* ng g m : module 
+* ng g c : component --module app
+* --flat : to be same file 
+* viewChild(operator)!
+*how to create a base image
+
+*global varaible : injectible appservice
+*token interceptopr : http interceptopr
