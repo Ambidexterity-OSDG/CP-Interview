@@ -36,7 +36,7 @@ app.listen(port,ip,()=>{
 
 
 
-//curl -v -F language=py -F file=@contest/backend/ide/file.py  http://localhost:5000/contest/aug1234/1A
+
 // https://www.youtube.com/watch?v=UYh6EvpQquw
 // https://www.youtube.com/watch?v=a30flH_q5-A&list=PL2dKqfImstaRhNOShwTdduXyRbID9GtmA&index=2
 // https://www.youtube.com/watch?v=Oe421EPjeBE
