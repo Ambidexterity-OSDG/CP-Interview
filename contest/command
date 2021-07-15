@@ -12,3 +12,6 @@
 #backend
 *npm init -y
 *npm install express
+
+*gitIgnore update
+ git rm -rf --cached .
