@@ -54,10 +54,10 @@ exports.contestQuestions = async function (req,res,next) {
         const fileURI = baseUrl + id +"%2F"+ que +".pdf";
         request.get(fileURI).then((response)=>{
             console.log(response);
-            const filePath = fileURI+"%2F?alt=media&token="+ response.data.downloadTokens;
+            const filePath = fileURI+"?alt=media&token="+ response.data.downloadTokens;
             res.status(200).send({success:true,fileUrl:filePath});
         }).catch((err)=>{
-            res.status(404).send({success:false,data:{msg:err.message}});
+            res.status(err.response.status).send({success:false,data:{msg:err.message}});
         })
     } catch (err) {
         res.status(503).send({success:false,data:{msg:"unable to fetch baseUrl"}});
@@ -65,15 +65,23 @@ exports.contestQuestions = async function (req,res,next) {
 };
 
 exports.submitQuestions = function (req,res,next) {
-    const extension = req.body.language;
-    const contest = req.params.id;
-    const problemId = req.params.que;
+    var extension = req.body.language;
+    var contest = req.params.id;
+    var problemId = req.params.que;
+    var submissionStatus = 0;
     if(extension == 'py'){
-       exec(`cat ${path.join(__dirname,'..')}/ide/1.txt | python3 ${path.join(__dirname,'..')}/uploads/file.py > output.txt`, (error)=>{
+       exec(`cat ${path.join(__dirname,'..')}/ide/${contest}-${problemId}.txt | python3 ${path.join(__dirname,'..')}/uploads/file.py > ${path.join(__dirname,'..')}/uploads/output.txt`, (error)=>{
            if(error){
-               console.log(error);
-               return;
+            //    console.log(error);
+               return res.status(200).send({ success: true , status: 1 ,uploaded: "yes"});
            } else{
+            var tmpBuf =  fs.readFileSync(`${path.join(__dirname,'..')}/ide/sol-${contest}-${problemId}.txt`);
+            var testBuf = fs.readFileSync(`${path.join(__dirname,'..')}/uploads/output.txt`);
+            if(tmpBuf.equals(testBuf)){
+                submissionStatus = 2;
+            } else {
+                submissionStatus = 1;
+            }
             const filePath = req.file.path;
             fs.unlink(filePath,(err)=>{
                 if(err){
@@ -81,14 +89,16 @@ exports.submitQuestions = function (req,res,next) {
                     return
                 }
             });
+            return res.json({ success: true , status: submissionStatus ,uploaded: "yes"});
            }
        })
     } else if(extension == 'js') {
         console.log('js');
     } else if( extension == 'java'){
         console.log('java')
-    } 
-    return res.json({ status: 'OK', uploaded: "yes"});
+    } else {
+        return res.json({ success: true , status: 0 ,uploaded: "no"});
+    }
 }
 
 exports.fillQuestionData = function(req,res,next){ 

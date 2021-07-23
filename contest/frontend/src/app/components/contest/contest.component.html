@@ -13,7 +13,7 @@
             <!-- time Column -->
             <ng-container matColumnDef="timing">
             <th mat-header-cell *matHeaderCellDef> Time </th>
-            <td mat-cell *matCellDef="let element"> {{element.timing}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.start}} </td>
             </ng-container>
         
             <!-- Name Column -->
@@ -43,12 +43,12 @@
             <!-- author Column-->
             <ng-container matColumnDef="authors">
                 <th mat-header-cell *matHeaderCellDef> Authors </th>
-                <td mat-cell *matCellDef="let element"> {{element.authors}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.author}} </td>
             </ng-container>
             <!-- action Column-->
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
-                <td mat-cell *matCellDef="let element"> <button *ngIf="element.status == 'ongoing'" mat-raised-button color="accent" (click)="enterContest(element.id)">Enter</button> </td>
+                <td mat-cell *matCellDef="let element"> <button *ngIf="element.status == 'ongoing'" mat-raised-button color="primary" (click)="enterContest(element.id)">Enter</button> </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

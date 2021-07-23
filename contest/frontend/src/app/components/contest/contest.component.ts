@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
+import {ContestService} from '../services/contest.service';
 
 export interface Contest {
   id: string;
   name: string;
-  timing: string;
+  start: string;
   company: string;
   rating: number;
-  authors: string;
+  author: string;
   status: string;
+  duration?: number;
+  end?: string;
 }
 
-const ELEMENT_DATA: Contest[] = [
-  {id:"aug124",name:"aug challenge - Dp course",timing:new Date().toLocaleString() ,company:"flipkart",rating:4.5,authors:"abc",status:"ongoing"},
-  {id:"mayflip2021",name:"May challenge - bit manipulation , matrix multiplication",timing:new Date().toLocaleString(),company:"self",rating:4,authors:"adc",status:"upcoming"}
-];
 
 @Component({
   selector: 'app-contest',
@@ -23,13 +22,40 @@ const ELEMENT_DATA: Contest[] = [
   styleUrls: ['./contest.component.css']
 })
 export class ContestComponent implements OnInit {
+  ELEMENT_DATA: Contest[] = [];
   displayedColumns: string[] = [ "timing", "name", "company", "rating", "authors", "actions"];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Contest>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private contestService: ContestService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const data1 = await this.contestService.getAllContest().toPromise();
+    const data2 = await this.contestService.getAllContest('upcoming').toPromise();
+    if(data1.data){
+      this.ELEMENT_DATA = this.ELEMENT_DATA.concat(data1.data);
+    }
+    if(data2.data){
+      this.ELEMENT_DATA = this.ELEMENT_DATA.concat(data2.data);
+    }
+    await this.updateTime();
+    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+ 
+
+
   }
+
+  async updateTime() {
+    this.ELEMENT_DATA.forEach((data) => {
+      console.log(data.start);
+      data.start = new Date(data.start).toLocaleString();
+      console.log(data.start);
+      if(data.end) {
+        data.end = new Date(data.end).toLocaleString();
+      }  
+    });
+  }
+
+ 
 
   enterContest(id : string){
     let location = `page/contest/${id}`;
@@ -41,5 +67,22 @@ export class ContestComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  // old approach
+   // getData() {
+  //   this.contestService.getAllContest().subscribe((data)=> {
+  //     if(data) {
+  //       this.ELEMENT_DATA = this.ELEMENT_DATA.concat(data.data);
+  //       console.log(this.ELEMENT_DATA);
+  //     }
+  //   });
+  //   this.contestService.getAllContest('upcoming').subscribe((data) => {
+  //     if(data) {
+  //       this.ELEMENT_DATA = this.ELEMENT_DATA.concat(data.data);
+  //       console.log(this.ELEMENT_DATA);
+  //     }
+  //   })
+  // }
+
 
 }

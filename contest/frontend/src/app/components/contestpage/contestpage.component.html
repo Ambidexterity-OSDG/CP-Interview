@@ -2,8 +2,8 @@
     <!-- <div class="problem-info">{{'Problem ID'}}</div> -->
     <div class="problem-data">
         <div class="statement">
-           
-            <mat-card class="problem-card">
+          <app-table class="problem-card" [tableData]="questionData" [tableCol]="cpContestCol"></app-table>
+            <!-- <mat-card class="problem-card">
                 <app-problem-viewer></app-problem-viewer>
                 <mat-card-header>
                   <div mat-card-avatar class="example-header-image"> <mat-icon color="primary">picture_as_pdf</mat-icon></div>
@@ -13,11 +13,11 @@
                 <mat-card-content>
                     
                 </mat-card-content>
-                <!-- <mat-card-actions>
+                <mat-card-actions>
                     <button mat-button>LIKE</button>
                     <button mat-button>SHARE</button>
-                  </mat-card-actions> -->
-              </mat-card>
+                  </mat-card-actions>
+              </mat-card> -->
         </div>
         <div class="submission">
             <!-- delete-->
@@ -38,16 +38,16 @@
                 <mat-card-content>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Problem</mat-label>
-                        <mat-select (selectionChange)="changeStatus($event.value)">
+                        <mat-select (selectionChange)="changeProblem($event.value)">
                           <mat-option  *ngFor="let que of question" [value]="que">
-                            {{que.queId+" "+que.queName}}
+                            {{que.problemId+" "+que.problemTitle}}
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
                     
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Programming Language</mat-label>
-                        <mat-select>
+                        <mat-select (selectionChange)="changeLang($event.value)">
                           <mat-option *ngFor="let lang of languageSelector" [value]="lang.extension">
                             {{lang.codingLanguage}}
                           </mat-option>
@@ -56,12 +56,14 @@
 
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>File :</mat-label>
-                        <input matInput disabled value="{{'code.py'}}">
+                        <input matInput disabled [value]="fileToUpload">
                     </mat-form-field>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button mat-button>upload</button>
-                  <button mat-button>submit</button>
+                  <button mat-button (click)="fileInput.click()">upload
+                    <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+                  </button>
+                  <button mat-button (click)="onSubmit()">submit</button>
                 </mat-card-actions>
               </mat-card>
         </div>

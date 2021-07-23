@@ -4,6 +4,7 @@ const multer = require('multer');
 const uuid = require('uuid').v4;
 const path = require('path');
 const dotenv = require('dotenv');
+var cors = require('cors');
 const exec = require('child_process').exec;
 
 //LOAD CONFIG
@@ -15,6 +16,9 @@ const app = express();
 //parser
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
+
+//cors
+app.use(cors({origin: '*'}))
 
 //Routes
 app.use('/',require('./contest/routes/routes'))

@@ -8,6 +8,14 @@ import { CustomMaterialModule} from '../custom-material.module';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome.component';
 import {SharedModule} from '../shared/shared.module';
+import {HttpClientModule} from '@angular/common/http';
+import {RestService} from './services/rest.service';
+import {ContestService} from './services/contest.service';
+
+const services = [
+  RestService,
+  ContestService
+];
 
 @NgModule({
   declarations: [ 
@@ -20,8 +28,10 @@ import {SharedModule} from '../shared/shared.module';
     CommonModule,
     RoutingRoutingModule,
     CustomMaterialModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
+  providers: [...services],
   schemas : [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class RoutingModule { }

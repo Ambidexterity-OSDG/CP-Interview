@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild , OnChanges, SimpleChanges, Input } from '@angular/core';
 import { PdfViewerComponent } from 'ng2-pdf-viewer'
 
 @Component({
@@ -6,14 +6,22 @@ import { PdfViewerComponent } from 'ng2-pdf-viewer'
   templateUrl: './problem-viewer.component.html',
   styleUrls: ['./problem-viewer.component.css']
 })
-export class ProblemViewerComponent implements OnInit {
+export class ProblemViewerComponent implements OnInit, OnChanges {
   @ViewChild(PdfViewerComponent, { static: false })
   private pdfComponent!: PdfViewerComponent;
-  pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+  @Input() pdfLink = "";
+  pdfSrc = "";
+  // @Input() pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   constructor() { }
 
   ngOnInit(): void {
   }
+  ngOnChanges(changes : SimpleChanges) {
+    if(changes.pdfLink) {
+      this.pdfSrc = this.pdfLink;
+    }
+  }
+
   pageRendered() {
     this.pdfComponent.pdfViewer.currentScaleValue = 'page-fit';
   }
