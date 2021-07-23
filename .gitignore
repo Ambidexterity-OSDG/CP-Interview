@@ -1,4 +1,4 @@
 *.env
 *.DS_Store
 *firebase_connect.js
-**/node_modules
+backend/node_modules
